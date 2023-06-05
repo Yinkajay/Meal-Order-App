@@ -1,35 +1,51 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
-import { Card } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import { SvgXml } from "react-native-svg";
+import StarIcon from "../../../../assets/StarIcon";
+import OpenIcon from "../../../../assets/OpenIcon";
+import { Spacer } from "../../../components/spacer/Spacer";
+import { Text } from "../../../components/typography/TextComponent";
 import styled from "styled-components/native";
+import { Icon, Address, Info, OpenStatus, Rating, RestaurantCard, RestaurantCardCover, Section } from "./RestaurantInfoCardStyles.js";
 
-const Title = styled.Text`
-padding: 15px;
-color: ${props => props.theme.colors.ui.primary}
-`;
 
-const RestaurantCard = styled(Card)`
-backgroundColor: white;
-`;
-
-const RestaurantCardCover = styled(Card.Cover)`
-padding: 20px;
-backgorundColor:white;
-`;
 
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
     const { name = "Chicken rep",
-        icon,
-        photos = ["https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg"],
+        icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+        photos = ["https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60"],
         address = "20 LA crescent",
         isOpen = true,
         rating = 4,
-        isClosedTempoarily,
+        isClosedTempoarily = true,
     } = restaurant;
+
+    const ratingArray = Array.from(new Array(Math.round(rating)));
+
     return (
         <RestaurantCard mode="elevated" style={styles.card}>
             <RestaurantCardCover style={styles.cover} source={{ uri: photos[0] }} />
-            <Title>{name}</Title>
+            <Info>
+                <Text variant="label">{name}</Text>
+                <Section>
+                    <Rating>
+                        {ratingArray.map(() => <SvgXml xml={StarIcon} width={20} height={20} />)}
+                    </Rating>
+                    <OpenStatus>
+                        {isClosedTempoarily && (
+                            <Text variant='error'>
+                                CLOSED
+                            </Text>
+                        )}
+                        <Spacer position="left" size="large">
+                            {isOpen && <SvgXml xml={OpenIcon} width={30} height={30} />}
+                        </Spacer>
+                        <View style={{ paddingLeft: 16 }} />
+                        <Icon style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+                    </OpenStatus>
+                </Section>
+                <Address>{address}</Address>
+            </Info>
         </RestaurantCard>
     );
 };
