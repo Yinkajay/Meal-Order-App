@@ -3,5 +3,7 @@
     "rules":{
         "quotes": [2,"double", {"avoidEscape":true}],
         "prettier/prettier": 0,
-    }
+        "semi": "off",
+    },
+
 }

@@ -16,10 +16,9 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+import { restaurantsRequest } from "./src/services/restaurants/RestaurantsService";
 
-
-
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
   Restaurants: "fast-food",
@@ -27,13 +26,14 @@ const TAB_ICON = {
   Settings: "settings-sharp",
 };
 
-const tabBarIcon = ( ) => <Ionicons name={"iconName"} size={size} color={color} />;
+const tabBarIcon = ({ size, color }) => <Ionicons name={"iconName"} size={size} color={color} />;
+
 const screenOptions = ({ route }) => {
   const iconName = TAB_ICON[route.name]
   return {
-tabBarIcon: ({size,color})=> (
-  <Ionicons  name={iconName} size={size} color={color} />
-)
+    tabBarIcon: ({ size, color }) => (
+      <Ionicons name={iconName} size={size} color={color} />
+    )
   }
 }
 
@@ -58,18 +58,18 @@ export default function App() {
             screenOptions={screenOptions}
             tabBarOptions={{
               activeTintColor: "tomato",
-          inactiveTintColor: "gray",
+              inactiveTintColor: "gray",
             }}
-              // tabBarActiveTintColor: "tomato",
-              // tabBarInactiveTintColor: "gray",
+          // tabBarActiveTintColor: "tomato",
+          // tabBarInactiveTintColor: "gray",
           >
-          <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-          <Tab.Screen name="Map" component={RestaurantsScreen} />
-          <Tab.Screen name="Settings" component={RestaurantsScreen} />
-        </Tab.Navigator>
-      </NavigationContainer>
-      <ExpoStatusBar />
-    </ThemeProvider >
+            <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+            <Tab.Screen name="Map" component={RestaurantsScreen} />
+            <Tab.Screen name="Settings" component={RestaurantsScreen} />
+          </Tab.Navigator>
+        </NavigationContainer>
+        <ExpoStatusBar />
+      </ThemeProvider >
     </>
   );
 }
