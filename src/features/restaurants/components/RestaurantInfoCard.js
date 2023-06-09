@@ -7,6 +7,7 @@ import { Spacer } from "../../../components/spacer/Spacer";
 import { Text } from "../../../components/typography/TextComponent";
 import styled from "styled-components/native";
 import { Icon, Address, Info, OpenStatus, Rating, RestaurantCard, RestaurantCardCover, Section } from "./RestaurantInfoCardStyles.js";
+import { ActivityIndicator } from "react-native-paper";
 
 
 
@@ -29,7 +30,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
                 <Text variant="label">{name}</Text>
                 <Section>
                     <Rating>
-                        {ratingArray.map(() => <SvgXml xml={StarIcon} width={20} height={20} />)}
+                        {ratingArray.map((item, index) => <SvgXml xml={StarIcon} key={index} width={20} height={20} />)}
                     </Rating>
                     <OpenStatus>
                         {isClosedTempoarily && (
