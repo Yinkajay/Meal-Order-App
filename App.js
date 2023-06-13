@@ -2,7 +2,6 @@ import React from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { SafeAreaView, Text, View } from "react-native";
 import { Searchbar } from "react-native-paper";
-import { RestaurantsScreen } from "./src/features/restaurants/screens/RestaurantsScreen";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
 import {
@@ -18,25 +17,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { RestaurantsContextProvider } from "./src/services/restaurants/RestaurantsContext";
 import { LocationContextProvider } from "./src/services/location/LocationContext";
+import { AppNavigator } from "./src/infrastructure/navigation/AppNavigator";
+import { Navigator } from "./src/infrastructure/navigation";
 
-const Tab = createBottomTabNavigator();
-
-const TAB_ICON = {
-  Restaurants: "fast-food",
-  Map: "map-sharp",
-  Settings: "settings-sharp",
-};
-
-const tabBarIcon = ({ size, color }) => <Ionicons name={"iconName"} size={size} color={color} />;
-
-const screenOptions = ({ route }) => {
-  const iconName = TAB_ICON[route.name]
-  return {
-    tabBarIcon: ({ size, color }) => (
-      <Ionicons name={iconName} size={size} color={color} />
-    )
-  }
-}
 
 export default function App() {
 
@@ -57,19 +40,7 @@ export default function App() {
         <LocationContextProvider>
           <RestaurantsContextProvider>
             <NavigationContainer>
-              <Tab.Navigator
-                screenOptions={screenOptions}
-                tabBarOptions={{
-                  activeTintColor: "tomato",
-                  inactiveTintColor: "gray"
-                }}
-              // tabBarActiveTintColor: "tomato",
-              // tabBarInactiveTintColor: "gray",
-              >
-                <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-                <Tab.Screen name="Map" component={RestaurantsScreen} />
-                <Tab.Screen name="Settings" component={RestaurantsScreen} />
-              </Tab.Navigator>
+              <Navigator />
             </NavigationContainer>
             <ExpoStatusBar />
           </RestaurantsContextProvider>

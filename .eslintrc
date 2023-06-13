@@ -1,8 +1,8 @@
 {
     "extends": "@react-native-community",
     "rules":{
-        "quotes": [2,"double", {"avoidEscape":true}],
-        // "quotes": "off",
+        // "quotes": [2,"double", {"avoidEscape":true}],
+        "quotes": "off",
         "prettier/prettier": 0,
         "semi": "off",
         "comma-dangle": "off"
