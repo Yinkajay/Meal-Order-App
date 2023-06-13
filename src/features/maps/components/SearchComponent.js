@@ -5,7 +5,12 @@ import { LocationContext } from "../../../services/location/LocationContext";
 
 const SearchContainer = styled.View`
 padding: ${props => props.theme.space[3]};
+position: absolute;
+z-index: 999;
+top: 35px;
+width: 100%;
 `;
+
 export const Search = () => {
     const { keyword, search } = useContext(LocationContext)
     const [searchWord, setSearchWord] = useState(keyword)
@@ -13,6 +18,7 @@ export const Search = () => {
     useEffect(() => {
         setSearchWord(keyword)
     }, [keyword])
+
     return (
         <SearchContainer>
             <Searchbar placeholder="Search a location" value={searchWord} onSubmitEditing={() => { search(searchWord) }} onChangeText={(searchtext) => {
