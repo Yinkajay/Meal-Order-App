@@ -8,6 +8,7 @@ import { Text } from "../../../components/typography/TextComponent";
 import styled from "styled-components/native";
 import { Icon, Address, Info, OpenStatus, Rating, RestaurantCard, RestaurantCardCover, Section } from "./RestaurantInfoCardStyles.js";
 import { ActivityIndicator } from "react-native-paper";
+import { Favourites } from "../../../components/favourites/Favourites";
 
 
 
@@ -25,6 +26,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
 
     return (
         <RestaurantCard mode="elevated" style={styles.card}>
+            <Favourites />
             <RestaurantCardCover style={styles.cover} source={{ uri: photos[0] }} />
             <Info>
                 <Text variant="label">{name}</Text>

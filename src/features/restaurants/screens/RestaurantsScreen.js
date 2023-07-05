@@ -8,6 +8,7 @@ import { Spacer } from "../../../components/spacer/Spacer";
 import { SafeArea } from "../../../components/utility/SafeAreaComponent";
 import { RestaurantsContext } from "../../../services/restaurants/RestaurantsContext";
 import { Search } from "../components/SearchComponent";
+import { FavouritesContext } from "../../../services/favourites/FavouritesContext";
 
 // const SafeArea = styled(SafeAreaView)`
 // flex:1;]
@@ -33,6 +34,8 @@ const LoadingContainer = styled.View`
 
 export const RestaurantsScreen = ({ navigation }) => {
     const { isLoading, error, restaurants } = useContext(RestaurantsContext)
+    const{ favouriteRestaurants} = useContext(FavouritesContext)
+    console.log(favouriteRestaurants)
     return <>
         <SafeArea>
             {isLoading && (
