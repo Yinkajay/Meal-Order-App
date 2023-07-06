@@ -16,7 +16,7 @@ export const MapCallout = ({ restaurant }) => {
 
     return (
         <>
-        <CompactRestaurantInfo restaurant={restaurant}/>
+        <CompactRestaurantInfo isMap restaurant={restaurant}/>
             {/* <Card.Cover source={{ uri: restaurant.photos[0] }} />
             <CalloutText>
                 {restaurant.name}
