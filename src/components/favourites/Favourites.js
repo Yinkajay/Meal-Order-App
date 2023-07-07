@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { TouchableOpacity } from 'react-native'
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import { AntDesign } from '@expo/vector-icons'
 import { FavouritesContext } from '../../services/favourites/FavouritesContext'
 

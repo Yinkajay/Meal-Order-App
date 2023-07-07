@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { SafeAreaView, Text, View } from "react-native";
 import { Searchbar } from "react-native-paper";
@@ -20,10 +20,24 @@ import { LocationContextProvider } from "./src/services/location/LocationContext
 import { AppNavigator } from "./src/infrastructure/navigation/AppNavigator";
 import { Navigator } from "./src/infrastructure/navigation";
 import { FavouritesContextProvider } from "./src/services/favourites/FavouritesContext";
+import { AuthenticationContextProvider } from "./src/services/authentication/AuthenticationContext";
+import {initializeApp} from 'firebase/app';
 
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyALLGFCkH0cPx0EhdLfiuYh_ZI99wyZddo",
+  authDomain: "mealstogo-a80c2.firebaseapp.com",
+  projectId: "mealstogo-a80c2",
+  storageBucket: "mealstogo-a80c2.appspot.com",
+  messagingSenderId: "948317478509",
+  appId: "1:948317478509:web:2763733c4504eedfd26964"
+};
+
+// if(!firebase.apps.length)
+ const app = initializeApp(firebaseConfig)
 
 export default function App() {
-
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular
   });
@@ -38,16 +52,16 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavouritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <NavigationContainer>
-                <Navigator />
-              </NavigationContainer>
-              <ExpoStatusBar />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
-        </FavouritesContextProvider>
+        <AuthenticationContextProvider>
+          <FavouritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantsContextProvider>
+                  <Navigator />
+                <ExpoStatusBar />
+              </RestaurantsContextProvider>
+            </LocationContextProvider>
+          </FavouritesContextProvider>
+        </AuthenticationContextProvider>
       </ThemeProvider >
     </>
   );
