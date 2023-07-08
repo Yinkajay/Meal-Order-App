@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 import { Button } from 'react-native-paper'
 import {colors} from '../../../infrastructure/theme/colors'
+import { TextInput } from 'react-native-paper'
 
 export const AccountBackGround = styled.ImageBackground`
 flex: 1;
@@ -29,7 +30,11 @@ padding: ${props => props.theme.space[2]}
 `
 
 export const LoginContainer = styled.View`
-padding: ${props => props.theme.space[5]}
+padding: ${props => props.theme.space[4]}
 margin-top: ${props => props.theme.space[2]}
-background-color:white;
+background-color:rgba(255,255,255,0.65);
+`
+
+export const LoginInput = styled(TextInput)`
+width: 200px;
 `

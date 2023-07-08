@@ -21,7 +21,7 @@ import { AppNavigator } from "./src/infrastructure/navigation/AppNavigator";
 import { Navigator } from "./src/infrastructure/navigation";
 import { FavouritesContextProvider } from "./src/services/favourites/FavouritesContext";
 import { AuthenticationContextProvider } from "./src/services/authentication/AuthenticationContext";
-import {initializeApp} from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 
 
 
@@ -34,8 +34,9 @@ const firebaseConfig = {
   appId: "1:948317478509:web:2763733c4504eedfd26964"
 };
 
-// if(!firebase.apps.length)
- const app = initializeApp(firebaseConfig)
+export const fireapp = initializeApp(firebaseConfig)
+
+console.log(fireapp)
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
@@ -56,7 +57,7 @@ export default function App() {
           <FavouritesContextProvider>
             <LocationContextProvider>
               <RestaurantsContextProvider>
-                  <Navigator />
+                <Navigator />
                 <ExpoStatusBar />
               </RestaurantsContextProvider>
             </LocationContextProvider>
