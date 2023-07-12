@@ -36,8 +36,6 @@ const firebaseConfig = {
 
 export const fireapp = initializeApp(firebaseConfig)
 
-console.log(fireapp)
-
 export default function App() {
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular

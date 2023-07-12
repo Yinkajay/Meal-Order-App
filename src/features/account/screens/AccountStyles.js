@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { Button } from 'react-native-paper'
-import {colors} from '../../../infrastructure/theme/colors'
+import { colors } from '../../../infrastructure/theme/colors'
 import { TextInput } from 'react-native-paper'
 
 export const AccountBackGround = styled.ImageBackground`
@@ -23,8 +23,8 @@ background-color:white;
 `
 
 export const AuthButton = styled(Button).attrs({
-    buttonColor: colors.brand.primary, 
-    textColor: 'white', 
+    buttonColor: colors.brand.primary,
+    textColor: 'white',
 })`
 padding: ${props => props.theme.space[2]}
 `
@@ -34,7 +34,17 @@ padding: ${props => props.theme.space[4]}
 margin-top: ${props => props.theme.space[2]}
 background-color:rgba(255,255,255,0.65);
 `
-
 export const LoginInput = styled(TextInput)`
-width: 200px;
+width: 300px;
+`
+
+export const Title = styled.Text`
+font-size:30px;
+`
+export const ErrorContainer = styled.View`
+max-width:300px;
+align-items: center;
+align-self: center;
+margin-top: ${props=> props.theme.space[2]}
+margin-bottom: ${props => props.theme.space[2]}
 `
