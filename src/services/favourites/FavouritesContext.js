@@ -1,11 +1,13 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
+import { AuthContext } from "../authentication/AuthenticationContext";
 
 export const FavouritesContext = createContext()
 
 export const FavouritesContextProvider = ({ children }) => {
     const [favouriteRestaurants, setFavouriteRestaurants] = useState([])
+    const { user } = useContext(AuthContext)
 
     const addFavourite = (restaurant) => {
         setFavouriteRestaurants([...favouriteRestaurants, restaurant])
@@ -16,18 +18,18 @@ export const FavouritesContextProvider = ({ children }) => {
         setFavouriteRestaurants(newFavourites)
     }
 
-    const storeFavourites = async (value) => {
+    const storeFavourites = async (value, uid) => {
         try {
             const jsonValue = JSON.stringify(value);
-            await AsyncStorage.setItem('@favourites', jsonValue);
+            await AsyncStorage.setItem(`@favourites-${uid}`, jsonValue);
         } catch (e) {
             console.log('error storing', e)
         }
     };
 
-    const getFavourites = async () => {
+    const getFavourites = async (uid) => {
         try {
-            const value = await AsyncStorage.getItem('@favourites');
+            const value = await AsyncStorage.getItem(`@favourites-${uid}`);
             if (value !== null) {
                 setFavouriteRestaurants(JSON.parse(value))
             }
@@ -37,12 +39,12 @@ export const FavouritesContextProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        getFavourites()
-    }, [])
+        if (user) getFavourites(user.uid)
+    }, [user])
 
     useEffect(() => {
-        storeFavourites(favouriteRestaurants)
-    }, [favouriteRestaurants])
+        if (user) storeFavourites(favouriteRestaurants, user.uid)
+    }, [favouriteRestaurants, user])
 
     return (
         <FavouritesContext.Provider

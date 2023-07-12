@@ -5,14 +5,14 @@ import { Spacer } from '../../../components/spacer/Spacer'
 import { useState } from 'react'
 import { AuthContext } from '../../../services/authentication/AuthenticationContext'
 import { Text } from '../../../components/typography/TextComponent'
-import { Title } from 'react-native-paper'
+import { ActivityIndicator, Title } from 'react-native-paper'
 
 export const RegisterScreen = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [repeatedPassword, setRepeatedPassword] = useState('')
 
-    const { onRegister, error } = useContext(AuthContext)
+    const { onRegister, isLoading, error } = useContext(AuthContext)
 
     if (error) {
         console.log(error)
@@ -36,9 +36,14 @@ export const RegisterScreen = ({ navigation }) => {
                     </ErrorContainer>
                 </Spacer>
                 <Spacer size='large' />
-                <AuthButton icon='mail' textContentType={password} onPress={() => onRegister(email, password, repeatedPassword)}>
-                    Register
-                </AuthButton>
+                {isLoading
+                    ? <ActivityIndicator />
+                    : (
+                        <AuthButton icon='mail' textContentType={password} onPress={() => onRegister(email, password, repeatedPassword)}>
+                            Register
+                        </AuthButton>
+                    )
+                }
             </LoginContainer>
             <Spacer size='large'>
                 <AuthButton mode='contained' onPress={() => navigation.goBack()}>

@@ -5,13 +5,13 @@ import { Spacer } from '../../../components/spacer/Spacer'
 import { useState } from 'react'
 import { AuthContext } from '../../../services/authentication/AuthenticationContext'
 import { Text } from '../../../components/typography/TextComponent'
-import { Title } from 'react-native-paper'
+import { ActivityIndicator, Title } from 'react-native-paper'
 
 export const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const { onLogin, error } = useContext(AuthContext)
+    const { onLogin, isLoading, error } = useContext(AuthContext)
 
     if (error) {
         console.log(error)
@@ -33,9 +33,13 @@ export const LoginScreen = ({ navigation }) => {
                     </ErrorContainer>
                 </Spacer>
                 <Spacer size='large' />
-                <AuthButton textContentType={password} onPress={() => onLogin(email, password)}>
-                    Login
-                </AuthButton>
+                {isLoading
+                    ? <ActivityIndicator />
+                    : (<AuthButton textContentType={password} onPress={() => onLogin(email, password)}>
+                        Login
+                    </AuthButton>
+                    )
+                }
             </LoginContainer>
             <Spacer size='large'>
                 <AuthButton mode='contained' onPress={() => navigation.goBack()}>

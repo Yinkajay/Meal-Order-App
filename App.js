@@ -52,14 +52,14 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <FavouritesContextProvider>
+        {/* <FavouritesContextProvider>
             <LocationContextProvider>
-              <RestaurantsContextProvider>
+              <RestaurantsContextProvider> */}
                 <Navigator />
                 <ExpoStatusBar />
-              </RestaurantsContextProvider>
+              {/* </RestaurantsContextProvider>
             </LocationContextProvider>
-          </FavouritesContextProvider>
+          </FavouritesContextProvider> */}
         </AuthenticationContextProvider>
       </ThemeProvider >
     </>
