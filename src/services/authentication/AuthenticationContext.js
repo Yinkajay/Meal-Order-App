@@ -8,7 +8,6 @@ export const AuthenticationContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState(null)
     const [error, setError] = useState(null)
-    // const auth = useRef(getAuth()).current
     const auth = getAuth()
 
 
@@ -25,7 +24,7 @@ export const AuthenticationContextProvider = ({ children }) => {
     const onLogin = (email, password) => {
         setIsLoading(true)
         loginRequest(auth, email, password).then((u) => {
-            setUser(u)
+            setUser(u.user)
             setIsLoading(false)
         }
         ).catch((err) => {
@@ -56,7 +55,7 @@ export const AuthenticationContextProvider = ({ children }) => {
         signOut(auth).then(() => {
             console.log('signed out')
         }).catct(err => {
-            console.log(err)
+            console.log('ERROR IS: ', err)
         })
     }
 

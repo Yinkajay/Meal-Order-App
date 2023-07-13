@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import { FlatList, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { ActivityIndicator, Searchbar } from "react-native-paper";
 import { RestaurantInfoCard } from "../components/RestaurantInfoCard";
 import styled from "styled-components/native";
@@ -10,19 +10,14 @@ import { RestaurantsContext } from "../../../services/restaurants/RestaurantsCon
 import { Search } from "../components/SearchComponent";
 import { FavouritesContext } from "../../../services/favourites/FavouritesContext";
 import { FavouritesBar } from "../../../components/favourites/FavouritesBar";
+import { RestaurantList } from "../components/RestaurantListStyles";
+import { FadeInView } from "../../../components/animations/FadeAnimation";
 
 // const SafeArea = styled(SafeAreaView)`
 // flex:1;]
 // ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`}; 
 // `;
 
-
-
-const RestaurantList = styled(FlatList).attrs({
-    contentContainerStyle: {
-        padding: 16
-    }
-})``;
 
 const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
@@ -33,7 +28,7 @@ const LoadingContainer = styled.View`
   left: 50%;
 `;
 
-export const RestaurantsScreen = ({ navigation}) => {
+export const RestaurantsScreen = ({ navigation }) => {
     const { isLoading, error, restaurants } = useContext(RestaurantsContext)
     const { favouriteRestaurants } = useContext(FavouritesContext)
     const [isToggled, setIsToggled] = useState(false)
@@ -46,13 +41,15 @@ export const RestaurantsScreen = ({ navigation}) => {
                 </LoadingContainer>
             )}
             <Search isFavouritesToggled={isToggled} onFavouritesToggle={() => setIsToggled(!isToggled)} />
-            {isToggled && <FavouritesBar favourites={favouriteRestaurants} onNavigate={navigation.navigate} /> }
+            {isToggled && <FavouritesBar favourites={favouriteRestaurants} onNavigate={navigation.navigate} />}
             <RestaurantList
                 data={restaurants}
                 renderItem={({ item }) => (
                     <Spacer>
                         <TouchableOpacity onPress={() => navigation.navigate('RestaurantDetail', { restaurant: item })}>
-                            <RestaurantInfoCard restaurant={item} />
+                            <FadeInView>
+                                <RestaurantInfoCard restaurant={item} />
+                            </FadeInView>
                         </TouchableOpacity>
                     </Spacer>
                 )}
